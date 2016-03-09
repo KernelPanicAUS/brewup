@@ -1,7 +1,7 @@
 #!/bin/bash
 
 brewup_file=/usr/local/bin/brewup
-launch_daemon=~/Library/LaunchAgents/brewup.job.plist
+launch_agent=~/Library/LaunchAgents/brewup.job.plist
 
 echo " --- Creating brew maintenance script at: $brewup_file"
 
@@ -13,18 +13,18 @@ cat <<-END >> "$brewup_file"
 brew=/usr/local/bin/brew
 logger=/usr/bin/logger
 
-$brew update 2>&1  | $logger -t brewup.update
-$brew upgrade 2>&1 | $logger -t brewup.upgrade
-$brew cleanup 2>&1 | $logger -t brewup.cleanup
+\$brew update 2>&1  | \$logger -t brewup.update
+\$brew upgrade 2>&1 | \$logger -t brewup.upgrade
+\$brew cleanup 2>&1 | \$logger -t brewup.cleanup
 END
 
-echo " --- Creating launch daemon at: $launch_daemon"
+echo " --- Creating launch agent at: $launch_agent"
 
-touch $launch_daemon
+touch $launch_agent
 
-echo " --- Loading launch daemon $launch_daemon"
+echo " --- Loading launch agent $launch_agent"
 
-cat <<-END >> "$launch_daemon"
+cat <<-END >> "$launch_agent"
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
