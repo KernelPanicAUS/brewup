@@ -17,6 +17,7 @@ logger=/usr/bin/logger
 \$brew upgrade 2>&1 | \$logger -t brewup.upgrade
 \$brew cleanup 2>&1 | \$logger -t brewup.cleanup
 END
+chmod +x $brewup_file
 
 echo " --- Creating launch agent at: $launch_agent"
 
@@ -41,6 +42,6 @@ END
 
 echo " --- Running brew maintenance now..."
 
-$brewup_file
+$brewup_file&
 
 echo " --- Run: tail -f /var/log/system.log to monitor updates..."
